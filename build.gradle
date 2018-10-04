@@ -1,0 +1,32 @@
+// This buildscript is a result of several issues around asciidoctor
+//
+// https://github.com/asciidoctor/asciidoctor-pdf/issues/271
+// https://github.com/junit-team/junit5/pull/779
+// https://github.com/junit-team/junit5/pull/784
+// https://github.com/mojavelinux/junit5/blob/a1fd3d9d8b52e2c68f669d3d5daf6d242e68ed3e/documentation/documentation.gradle
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'org.asciidoctor:asciidoctorj-pdf:1.5.0-alpha.16'
+        classpath 'org.asciidoctor:asciidoctorj-diagram:1.5.8'
+    }
+}
+
+plugins {
+    id 'org.asciidoctor.convert' version '1.5.3'
+}
+
+asciidoctor {
+    requires 'asciidoctor-diagram'
+
+    separateOutputDirs false
+    sources { include 'index.adoc' }
+    backends 'html5', 'pdf' // , 'epub3'
+
+    attributes \
+        'outdir': outputDir.absolutePath
+}

@@ -1,0 +1,154 @@
+[[section-building-block-view]]
+
+== Building Block View
+
+[role="help"]
+****
+.Content
+The building block view shows the decomposition of the system into building blocks (modules, components, subsystems, classes,
+interfaces, packages, libraries, frameworks, layers, partitions, tiers, functions, macros, operations,
+datas structures, ...) as well as their dependencies (relationships, associations, ...)
+
+This view is mandatory for every architecture documentation.
+In analogy to a house this is the _floor plan_.
+
+.Motivation
+Maintain an overview of your source code by making its structure understandable through
+abstraction.
+
+This allows you to communicate with your stakeholder on an abstract level without disclosing implementation details.
+
+.Form
+The building block view are models based on the C4 model.
+****
+
+=== System Context Diagram
+
+[role="help"]
+****
+A System Context diagram is a good starting point for diagramming and documenting a software system, allowing you to step back and see the big picture. Draw a diagram showing your system as a box in the centre, surrounded by its users and the other systems that it interacts with.
+
+Detail isn't important here as this is your zoomed out view showing a big picture of the system landscape. The focus should be on people (actors, roles, personas, etc) and software systems rather than technologies, protocols and other low-level details. It's the sort of diagram that you could show to non-technical people.
+
+**Scope**: A single software system.
+
+**Primary elements**: The software system in scope. 
+Supporting elements: People and software systems directly connected to the software system in scope.
+
+**Intended audience**: Everybody, both technical and non-technical people, inside and outside of the software development team.
+****
+
+=== System Landscape Diagram
+
+****
+The C4 model provides a static view of a single software system but, in the real-world, software systems never live in isolation. For this reason, and particularly if you are responsible for a collection of software systems, it's often useful to understand how all of these software systems fit together within the bounds of an enterprise. To do this, simply add another diagram that sits "on top" of the C4 diagrams, to show the system landscape from an IT perspective. Like the System Context diagram, this diagram can show the organisational boundary, internal/external users and internal/external systems.
+
+Essentially this is a high-level map of the software systems at the enterprise level, with a C4 drill-down for each software system of interest. From a practical perspective, a system landscape diagram is really just a system context diagram without a specific focus on a particular software system.
+
+**Scope**: An enterprise.
+
+**Primary elements**: People and software systems related to the enterprise in scope.
+
+**Intended audience**: Technical and non-technical people, inside and outside of the software development team.
+****
+
+=== Container Diagram
+
+[role="help"]
+****
+Once you understand how your system fits in to the overall IT environment, a really useful next step is to zoom-in to the system boundary with a Container diagram. A "container" is something like a server-side web application, single-page application, desktop application, mobile app, database schema, file system, etc. Essentially, a container is a separately runnable/deployable unit (e.g. a separate process space) that executes code or stores data.
+
+The Container diagram shows the high-level shape of the software architecture and how responsibilities are distributed across it. It also shows the major technology choices and how the containers communicate with one another. It's a simple, high-level technology focussed diagram that is useful for software developers and support/operations staff alike.
+
+**Scope**: A single software system.
+
+**Primary elements**: Containers within the software system in scope. 
+Supporting elements: People and software systems directly connected to the containers.
+
+**Intended audience**: Technical people inside and outside of the software development team; including software architects, developers and operations/support staff.
+
+**Notes**: This diagram says nothing about deployment scenarios, clustering, replication, failover, etc.
+****
+
+=== Component Diagram
+
+****
+Next you can zoom in and decompose each container further to identify the major structural building blocks and their interactions.
+
+The Component diagram shows how a container is made up of a number of "components", what each of those components are, their responsibilities and the technology/implementation details.
+
+**Scope**: A single container.
+
+**Primary elements**: Components within the container in scope. 
+Supporting elements: Containers (within the software system in scope) plus people and software systems directly connected to the components.
+
+**Intended audience**: Software architects and developers.
+****
+
+[plantuml, diagram-components, png, align="center"]
+....
+title __Simple__ **component** example
+interface "Data Access" as DA
+
+DA - [First Component] 
+[First Component] ..> HTTP : use
+
+note left of HTTP : Web Service only
+
+note right of [First Component]
+  A note can also
+  be on several lines
+end note
+....
+
+=== Code/Class Diagram
+
+****
+Finally, you can zoom in to each component to show how it is implemented as code; using UML class diagrams, entity relationship diagrams or similar.
+
+This is an optional level of detail and is often available on-demand from tooling such as IDEs. Ideally this diagram would be automatically generated using tooling (e.g. an IDE or UML modelling tool), and you should consider showing only those attributes and methods that allow you to tell the story that you want to tell. This level of detail is not recommended for anything but the most important or complex components.
+
+**Scope**: A single component.
+
+**Primary elements**: Code elements (e.g. classes, interfaces, objects, functions, database tables, etc) within the component in scope.
+
+**Intended audience**: Software architects and developers.
+****
+
+[plantuml, diagram-classes, png, align="center"]
+....
+title __Simple__ **diagram** example
+
+class BlockProcessor
+class DiagramBlock
+class DitaaBlock
+class PlantUmlBlock
+
+BlockProcessor <|-- DiagramBlock
+DiagramBlock <|-- DitaaBlock
+DiagramBlock <|-- PlantUmlBlock
+....
+
+=== Dynamic Diagram
+
+****
+A simple dynamic diagram can be useful when you want to show how elements in a static model collaborate at runtime to implement a user story, use case, feature, etc. This dynamic diagram is based upon a UML communication diagram (previously known as a "UML collaboration diagram"). It is similar to a UML sequence diagram although it allows a free-form arrangement of diagram elements with numbered interactions to indicate ordering.
+
+**Scope**: An enterprise, software system or container.
+
+**Primary and supporting elements**: Depends on the diagram scope; enterprise (see System Landscape diagram), software system (see System Context or Container diagrams), container (see Component diagram).
+
+**Intended audience**: Technical and non-technical people, inside and outside of the software development team.
+****
+
+=== Deployment Diagram
+
+****
+A deployment diagram allows you to illustrate how containers in the static model are mapped to infrastructure. This deployment diagram is based upon a UML deployment diagram, although simplified slightly to show the mapping between containers and deployment nodes. A deployment node is something like physical infrastructure (e.g. a physical server or device), virtualised infrastructure (e.g. IaaS, PaaS, a virtual machine), containerised infrastructure (e.g. a Docker container), an execution environment (e.g. a database server, Java EE web/application server, Microsoft IIS), etc. Deployment nodes can be nested.
+
+**Scope**: A single software system.
+
+**Primary elements**: Deployment nodes and containers within the software system in scope.
+
+**Intended audience**: Technical people inside and outside of the software development team; including software architects, developers and operations/support staff.
+****

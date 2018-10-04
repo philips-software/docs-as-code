@@ -1,0 +1,92 @@
+[[section-design-decisions]]
+== Design Decisions
+
+[role="help"]
+****
+.Contents
+Important, expensive, large scale or risky architecture decisions including rationals.
+With "decisions" we mean selecting one alternative based on given criteria.
+
+Please use your judgement to decide whether an architectural decision should be documented
+here in this central section or whether you better document it locally
+(e.g. within the white box template of one building block).
+
+Avoid redundancy. Refer to section 4, where you already captured the most important decisions of your architecture.
+
+.Motivation
+Stakeholders of your system should be able to comprehend and retrace your decisions.
+
+.Form
+Various options:
+
+* List or table, ordered by importance and consequences or:
+* more detailed in form of separate sections per decision
+* ADR (architecture decision record) for every important decision
+****
+=== Architecture Decision Records
+
+.Architecture Decision Records
+[options="header",cols="1,5,3"]
+|===
+| ID
+| Title
+| Status  
+
+| <XXX>
+| <title>
+| <proposed, accepted, rejected, deprecated, superseded>
+
+| <n>
+| <title>
+| <proposed, accepted, rejected, deprecated, superseded>
+|===
+
+---
+
+==== ADR [001] - Title
+
+Title = short present tense imperative phrase, less than 50 characters, like a git commit message.
+
+[options="header",cols="1,2"]
+|===
+| Date
+| Status
+
+| <date for the decision>
+| <proposed, accepted, rejected, deprecated, superseded>
+|===
+
+===== Context
+what is the issue that we're seeing that is motivating this decision or change.
+
+===== Decision
+what is the change that we're actually proposing or doing.
+
+===== Consequences
+what becomes easier or more difficult to do because of this change.
+
+---
+
+==== ADR [n] - <Title>
+
+Title = short present tense imperative phrase, less than 50 characters, like a git commit message.
+
+[options="header",cols="1,2"]
+|===
+| Date
+| Status
+
+| <date for the decision>
+| <proposed, accepted, rejected, deprecated, superseded>
+|===
+
+===== Context
+what is the issue that we're seeing that is motivating this decision or change.
+
+===== Decision
+what is the change that we're actually proposing or doing.
+
+===== Consequences
+what becomes easier or more difficult to do because of this change.
+
+---
